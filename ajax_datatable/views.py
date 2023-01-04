@@ -783,6 +783,8 @@ class AjaxDatatableView(View):
                 select_related.add('__'.join(foreign_field.split('__')[0:-1]))
             elif m2m_foreign_field:
                 split_field = m2m_foreign_field.split('__')
+                if len(split_field) > 2:  # added by csaba nagy 2023-01-03
+                    split_field = m2m_foreign_field.split('__')[0:-1]
                 if len(split_field) != 2:
                     raise Exception('m2m_foreign_field should be 2 level max ex : authors__name')
                 m2m_field, m2m_name = split_field

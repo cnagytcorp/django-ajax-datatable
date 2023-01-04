@@ -227,10 +227,7 @@ class ManyToManyColumn(ForeignColumn):
 
     def get_foreign_value(self, obj):
         current_value = obj
-        if len(self._field_path) > 2:
-            m2m_name, m2m_field = self._field_path[0:-1]  # added by csaba nagy 2023-01-03
-        else:
-            m2m_name, m2m_field = self._field_path # added by csaba nagy 2023-01-03
+        m2m_name, m2m_field = self._field_path
 
         to_eval = f'obj.{m2m_name}_list'
         # _list should be generated in optimize_queryset, if not we use regular .all() to get the m2m
